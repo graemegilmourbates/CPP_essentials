@@ -52,6 +52,9 @@ class Logger{
     }
 
     void set_log_file(std::string file){
+      if(log_file.is_open()){
+        log_file.close();
+      }
       log_file.open(file);
     }
 

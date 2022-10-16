@@ -109,7 +109,6 @@ void test_merge_sort(test_result &r){
   test_list.push(5);
   test_list.push(1);
   LinkedList<int> sorted=mergeSort(test_list);
-  std::cout << "I merged" << std::endl;
   if(sorted[0]==1 && sorted[1]==5 && sorted[2]==10){
     r.passed=true;
   } else {

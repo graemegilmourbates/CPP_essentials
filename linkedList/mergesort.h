@@ -32,10 +32,6 @@ LinkedList<T> mergeSort(LinkedList<T> unsorted){
         }
       }
     }
-    std::cout << "\nIm out of the loop and returning" << std::endl;
-    std::cout << "Sorted: " << std::endl;
-    out.print();
-    std::cout << "Out length:" << out.length() << std::endl;
     return out;
   } else {
     if(len==1){

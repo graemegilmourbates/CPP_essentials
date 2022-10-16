@@ -19,6 +19,12 @@ class LinkedList{
 
   public:
     LinkedList();
+
+    LinkedList(const LinkedList&);
+    LinkedList& operator=(const LinkedList&);
+    LinkedList(LinkedList&&);
+    LinkedList& operator=(LinkedList&&);
+
     ~LinkedList();
 
     void push(T);
@@ -39,6 +45,38 @@ template <class T>
 LinkedList<T>::LinkedList(){
   root=NULL;
 }
+//Copy constructor
+template <class T>
+LinkedList<T>::LinkedList(const LinkedList<T> &other){
+  root=NULL;
+  ListNode* n=other.root;
+  while(n!=NULL){
+    push(n->package);
+    n=n->next;
+  }
+}
+//Copy assignment
+template <class T>
+LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T> &rhs){
+  if(this!=rhs){
+    root=rhs.root;
+  }
+  return *this;
+}
+//Move constructor
+template <class T>
+LinkedList<T>::LinkedList(LinkedList<T> &&other){
+  root=other.root;
+  other.root=NULL;
+}
+//Move assignment
+template <class T>
+LinkedList<T>& LinkedList<T>::operator=(LinkedList<T> &&rhs){
+  if(this!=&rhs){
+    root=rhs.root;
+  }
+  return *this;
+}
 
 template <class T>
 void LinkedList<T>::destroy_list(){
@@ -50,9 +88,6 @@ void LinkedList<T>::destroy_list(){
       delete current;
       current=next;
     }
-    return;
-  } else {
-    return;
   }
 }
 

@@ -1,4 +1,6 @@
 #include "linkedList.h"
+#ifndef mergesort_h
+#define mergesort_h
 
 template <typename T>
 LinkedList<T> mergeSort(LinkedList<T> unsorted){
@@ -48,3 +50,5 @@ LinkedList<T> mergeSort(LinkedList<T> unsorted){
     return out;
   }
 }
+
+#endif

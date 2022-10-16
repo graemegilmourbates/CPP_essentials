@@ -1,5 +1,6 @@
 #include "linkedList.h"
 #include "mergesort.h"
+#include "quicksort.h"
 #include "../unitTest/test.h"
 
 const int LIST_LENGTH=10;
@@ -131,6 +132,34 @@ void test_merge_sort_larger(test_result &r){
   }
 }
 
+void test_quick_sort(test_result &r){
+  auto test_list=LinkedList<int>();
+  test_list.push(10);
+  test_list.push(5);
+  test_list.push(1);
+  quickSort(test_list);
+  if(test_list[0]==1 && test_list[1]==5 && test_list[2]==10){
+    r.passed=true;
+  } else {
+    r.passed=false;
+  }
+}
+
+void test_quick_sort_larger(test_result &r){
+  auto test_list=LinkedList<int>();
+  int i=0;
+  populate_list(test_list);
+  quickSort(test_list);
+  r.passed=true;
+  while(i<LIST_LENGTH){
+    if(test_list[i]!=SORTED_COMPARE[i]){
+      r.passed=false;
+      break;
+    }
+    i++;
+  }
+}
+
 int main(){
   auto list_test=Test("Linked List Tests");
   list_test.add_test("push test", test_list_push);
@@ -148,5 +177,12 @@ int main(){
   merge_test.add_test("Merge Sort Large", test_merge_sort_larger);
 
   merge_test.run();
+
+  auto quick_test=Test("Quick sort tests");
+  quick_test.add_test("quick sort test", test_quick_sort);
+  quick_test.add_test("Quick Sort Large", test_quick_sort_larger);
+
+  quick_test.run();
+
   return 0;
 }

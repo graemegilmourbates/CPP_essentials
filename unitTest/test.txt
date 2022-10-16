@@ -1,0 +1,8 @@
+Sum function tests
+	####  PASSED Simple Addition Tests
+	####  PASSED Negative Number Test
+	####  FAILED Will Fail
+		Intentional fail
+	####  PASSED Lambda test
+	####  PASSED Random inputs
+Passed 4 out of 5

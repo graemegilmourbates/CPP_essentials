@@ -41,7 +41,22 @@ class Logger{
       debug_level=level;
     }
 
+    void log_to_screen(bool screen_option){
+      to_screen=screen_option;
+    }
+
+    void log_to_file(bool file_option){
+      to_file=file_option;
+      if(file_option==true){
+        if(!log_file.is_open()){
+          to_file=false;
+          throw "No file open";
+        }
+      }
+    }
+
     void set_level(std::string level){
+      level=std::toupper(level);
       if(level=="ERROR"){
         debug_level=2;
       } else if(level=="WARNING"){
@@ -56,6 +71,11 @@ class Logger{
         log_file.close();
       }
       log_file.open(file);
+      if(log_file.is_open()){
+        to_file=true;
+      } else {
+        throw "Could not open file";
+      }
     }
 
     void log(std::string message){

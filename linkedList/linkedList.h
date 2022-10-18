@@ -80,7 +80,7 @@ LinkedList<T>& LinkedList<T>::operator=(LinkedList<T> &&rhs){
 
 template <class T>
 void LinkedList<T>::destroy_list(){
-  if(root!=NULL || length()!=0){
+  if(root!=NULL){
     ListNode *current=root;
     ListNode *next;
     while(current){
@@ -89,6 +89,7 @@ void LinkedList<T>::destroy_list(){
       current=next;
     }
   }
+  root=NULL;
 }
 
 template <class T>

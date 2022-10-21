@@ -23,6 +23,12 @@ class BinaryTree{
       bNode *current=root;
       destroyTree(current);
     }
+
+    BinaryTree(const BinaryTree&)=delete;
+    BinaryTree& operator=(const BinaryTree&)=delete;
+    BinaryTree(BinaryTree&&)=delete;
+    BinaryTree& operator=(BinaryTree&&)=delete;
+
     void print(){
       print("", root, false);
     }

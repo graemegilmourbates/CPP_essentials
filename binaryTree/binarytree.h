@@ -35,7 +35,7 @@ class BinaryTree{
         print(prefix+(isLeft? "|  " : "   "), node->right, false);
       }
     }
-    void insert(T value){
+    void binary_insert(T value){
       root=insert(root, value);
     }
     bNode* insert(bNode *node, T value){
@@ -50,6 +50,28 @@ class BinaryTree{
           node->right=insert(node->right, value);
         } else if(value > node->package){
           node->left=insert(node->left, value);
+        }
+        return node;
+      }
+    }
+    void insert(T value){
+      root=balanced_insert(root, value);
+    }
+    bNode* balanced_insert(bNode *node, T value){
+      if(node==NULL){
+        node=new bNode;
+        node->left=NULL;
+        node->right=NULL;
+        node->package=value;
+        return node;
+      } else{
+        if(value < node->package){
+          node->right=balanced_insert(node->right, value);
+        } else if(value > node->package){
+          node->left=balanced_insert(node->left, value);
+        }
+        if(get_balance(node) < -1 || get_balance(node) > 1){
+          node=rebalance(node);
         }
         return node;
       }
@@ -88,6 +110,29 @@ class BinaryTree{
     bNode *right_left_rotate(bNode *node){
       node->right=rotate_right(node->right);
       node=rotate_left(node);
+      return node;
+    }
+    void balance(){
+      root=rebalance(root);
+    }
+    int get_balance(bNode *node){
+      int left_height=height(node->left);
+      int right_height=height(node->right);
+      return (right_height-left_height);
+    }
+    bNode *rebalance(bNode *node){
+      if(node!=NULL){
+        int cbal=get_balance(node);
+        if(cbal < -1 && get_balance(node->left)==-1){
+          return rotate_right(node);
+        } else if(cbal > 1 && get_balance(node->right)==1){
+          return rotate_left(node);
+        } else if(cbal < -1 && get_balance(node->left)==1){
+          return left_right_rotate(node);
+        } else if(cbal > 1 && get_balance(node->right)==-1){
+          return right_left_rotate(node);
+        }
+      }
       return node;
     }
   private:
